@@ -398,11 +398,15 @@ def attacked(mprot, pprot):
         print('Please emter a valid response. ')
         yorn = input('Would you like to be attacked? Yes or No? ')
 def damask(mprot, pprot):
-    again = input('Would you like to be attacked again? ')
-    if again == 'yes':
-        return damloop(mprot, pprot)
-    else:
-        sys.exit()
+    while True:
+        print(f'You take {attacked(mprot, pprot):.2f} damage.')
+        again = input('Would you like to be attacked again? ')
+        if again == 'yes':
+            again = True
+            break
+        if again == 'no':
+            again = False
+            break
 def damloop(mprot,pprot):
     loop = input('Would you like to be attacked again? ')
     if loop == 'yes':
@@ -447,7 +451,7 @@ def user_menu():
     print(f'The crowd control reduction is {ccr:.2f}')
     damaged = attacked(magic_prots, phys_prots)
     print(f'You take {damaged:.2f} damage.')
-    damloop(magic_prots, phys_prots)
+    damask(magic_prots, phys_prots)
 
 if __name__ == '__main__':
   user_menu()
