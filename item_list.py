@@ -271,136 +271,24 @@ emperor = {
     'crit' : False,
     'CCR' : False
     }
-exe = {
-    'item' : 'The Executioner',
-    'physical prots' : False,
+emperor = {
+    'item' : 'Emperor\'s Armor',
+    'physical prots' : 60,
     'magical prots' : False,
     'damage mit' : False,
     'mana' : False,
     'mp5' : False,
     'cooldown' : False,
     'hp5' : False,
-    'health' : False,
+    'health' : 250,
     'movement' : False,
-    'physical power' : 35,
+    'physical power' : False,
     'magical power' : False, 
-    'passive' : 'Basic Attacks against an enemy reduce your target\'s Physical Protection by 7 percent for 3 seconds (max. 4 Stacks).',
-    'attack speed' : .2,
+    'passive' : 'Damageable enemy structures within 55 units have their Attack Speed reduced by 30%. Damageable allied structures within 55 units have their Attack Speed increased by 40%.',
+    'attack speed' : False,
     'percent pen' : False,
     'flat pen' : False,
     'lifesteal' : False,
     'crit' : False,
     'CCR' : False
     }
-asi = {
-    'item' : 'Asi',
-    'physical prots' : False,
-    'magical prots' : False,
-    'damage mit' : False,
-    'mana' : False,
-    'mp5' : False,
-    'cooldown' : False,
-    'hp5' : False,
-    'health' : False,
-    'movement' : False,
-    'physical power' : 25,
-    'magical power' : False, 
-    'passive' : 'If you drop below 35% Health, you gain an additional 30% Physical Lifesteal for 5 seconds. Can only occur once every 15 seconds.',
-    'attack speed' : .25,
-    'percent pen' : False,
-    'flat pen' : 15,
-    'lifesteal' : .2,
-    'crit' : False,
-    'CCR' : False
-    }
-pythag = {
-    'item' : 'Pythagorem\'s Timepiece',
-    'physical prots' : False,
-    'magical prots' : False,
-    'damage mit' : False,
-    'mana' : False,
-    'mp5' : False,
-    'cooldown' : False,
-    'hp5' : False,
-    'health' : 200,
-    'movement' : False,
-    'physical power' : False,
-    'magical power' : 70, 
-    'passive' : ' Allied gods within 70 units have their Magical Lifesteal increased by 12 percent and their Magical Power increased by 30 or their Physical Lifesteal increased by 10 percent and their Physical Power increased by 20.',
-    'attack speed' : False,
-    'percent pen' : .1,
-    'flat pen' : False,
-    'lifesteal' : .24,
-    'crit' : False,
-    'CCR' : False
-    }
-def get_item(prompt):
-    item = input(prompt)
-    if item == 'sov':
-        return sov
-    if item == 'valor':
-        return valor
-    if item == 'genjis':
-        return genjis
-    if item == 'bulwark':
-        return bulwark
-    if item == 'failnot':
-        return failnot
-    if item == 'soul':
-        return soul
-    if item == 'jotunn':
-        return jotunn
-    if item == 'hydras':
-        return hyrdras
-    if item == 'malice':
-        return malice
-    if item == 'soul_eater':
-        return soul_eater
-    if item == 'mystical':
-        return mystical
-    if item == 'midgardian':
-        return midgardian
-    if item == 'emperor':
-        return emperor
-    if item == 'exe':
-        return exe
-    if item == 'asi':
-        return asi
-    if item == 'pythag':
-        return pythag
-    else:
-        print('That item is either not in the database or has a typo')
-
-
-def user_menu():
-    print('Welcome to the Smite Calculator would you please enter the items you would like on your character')
-    print('The items currently listed are valor, genjis, bulwark, failnot, soul, jotunn, hydras, malice, soul_eater, sov, mystical, midgardian, emperor, exe, asi, pythag')
-    item1 = get_item('Please enter your first item ')
-    item2 = get_item('Please enter your second item ')
-    item3 = get_item('Please enter your third item ')
-    item4 = get_item('Please enter your fourth item ')
-    item5 = get_item('Please enter your fifth item ')
-    item6 = get_item('Please enter your sixth item ')
-    phys_prots = item1['physical prots'] + item2['physical prots'] + item3['physical prots'] + item4['physical prots'] + item5['physical prots'] + item6['physical prots']
-    magic_prots = item1['magical prots'] + item2['magical prots'] + item3['magical prots'] + item4['magical prots'] + item5['magical prots'] + item6['magical prots']
-    phys_power = item1['physical power'] + item2['physical power'] + item3['physical power'] + item4['physical power'] + item5['physical power'] + item6['physical power']
-    attack_speed = item1['attack speed'] + item2['attack speed'] + item3['attack speed'] + item4['attack speed'] + item5['attack speed'] + item6['attack speed']
-    cooldown = item1['cooldown'] + item2['cooldown'] + item3['cooldown'] + item4['cooldown'] + item5['cooldown'] + item6['cooldown']
-    ccr = item1['CCR'] + item2['CCR'] + item3['CCR'] + item4['CCR'] + item5['CCR'] + item6['CCR']
-    print('The build is')
-    print(item1['item'])
-    print(item2['item'])
-    print(item3['item'])
-    print(item4['item'])
-    print(item5['item'])
-    print(item6['item'])
-    print(f'The physical protections are {phys_prots}')
-    print(f'The magical protections are {magic_prots}')
-    print(f'The physical power is {phys_power}')
-    print(f'The attack speed is {attack_speed} (this is as a percent but decimal form so 1.00 is 100 percent)')
-    print(f'The cooldown is {cooldown}')
-    print(f'The crowd control reduction is {ccr}')
-
-if __name__ == '__main__':
-  user_menu()
-
