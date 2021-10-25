@@ -397,29 +397,24 @@ def attacked(mprot, pprot):
     else:
         print('Please emter a valid response. ')
         yorn = input('Would you like to be attacked? Yes or No? ')
-def damask(mprot, pprot):
-    while True:
-        print(f'You take {attacked(mprot, pprot):.2f} damage.')
-        again = input('Would you like to be attacked again? ')
-        if again == 'yes':
-            again = True
-            break
-        if again == 'no':
-            again = False
-            break
-def damloop(mprot,pprot):
-    loop = input('Would you like to be attacked again? ')
-    if loop == 'yes':
-        while True:
-            print(f'You take {attacked(mprot, pprot):.2f} damage.')
-            again = input('Would you like to be attacked again? ')
-            if again == 'yes':
-                again = True
-                break
-            if again == 'no':
-                again = False
-                break
-    if loop == 'no':
+def damtest(mprot, pprot):
+    again = input('Would you like to be attacked again? yes or no? ')
+    while again == 'yes':
+        print(f'You take {special_attack(mprot, pprot):.2f} damage.')
+        again = input('Would you like to be attacked? ')
+def special_attack(mprot, pprot):
+    morp = input('Is the attack magical or physical? ')
+    while morp.lower() != 'quit':
+        if morp == 'magical':
+            dam = int(input('Please enter damage value '))
+            return (100 * dam) / (mprot + 100)
+        if morp == 'physical':
+            dam = int(input('Please enter damage value '))
+            return (100 * dam) / (pprot + 100)
+        else:
+            print('Please select magical or physical')
+            morp = input('Is the attack magical or physical? ')
+    else:
         sys.exit()
 def user_menu():
     print('Welcome to the Smite Calculator would you please enter the items you would like on your character')
@@ -451,7 +446,7 @@ def user_menu():
     print(f'The crowd control reduction is {ccr:.2f}')
     damaged = attacked(magic_prots, phys_prots)
     print(f'You take {damaged:.2f} damage.')
-    damask(magic_prots, phys_prots)
+    damtest(magic_prots, phys_prots)
 
 if __name__ == '__main__':
   user_menu()
