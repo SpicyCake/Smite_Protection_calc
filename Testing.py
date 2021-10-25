@@ -1,3 +1,4 @@
+import sys
 valor = {
     'item' : 'Breastplate of Valor',
     'physical prots' : 65,
@@ -336,42 +337,86 @@ pythag = {
     }
 def get_item(prompt):
     item = input(prompt)
-    if item == 'sov':
-        return sov
-    if item == 'valor':
-        return valor
-    if item == 'genjis':
-        return genjis
-    if item == 'bulwark':
-        return bulwark
-    if item == 'failnot':
-        return failnot
-    if item == 'soul':
-        return soul
-    if item == 'jotunn':
-        return jotunn
-    if item == 'hydras':
-        return hyrdras
-    if item == 'malice':
-        return malice
-    if item == 'soul_eater':
-        return soul_eater
-    if item == 'mystical':
-        return mystical
-    if item == 'midgardian':
-        return midgardian
-    if item == 'emperor':
-        return emperor
-    if item == 'exe':
-        return exe
-    if item == 'asi':
-        return asi
-    if item == 'pythag':
-        return pythag
+    while item.lower() != 'quit':
+        if item == 'sov':
+            return sov
+        if item == 'valor':
+            return valor
+        if item == 'genjis':
+            return genjis
+        if item == 'bulwark':
+            return bulwark
+        if item == 'failnot':
+            return failnot
+        if item == 'soul':
+            return soul
+        if item == 'jotunn':
+            return jotunn
+        if item == 'hydras':
+            return hyrdras
+        if item == 'malice':
+            return malice
+        if item == 'soul_eater':
+            return soul_eater
+        if item == 'mystical':
+            return mystical
+        if item == 'midgardian':
+            return midgardian
+        if item == 'emperor':
+            return emperor
+        if item == 'exe':
+            return exe
+        if item == 'asi':
+            return asi
+        if item == 'pythag':
+            return pythag
+        else:
+            print('That item is either not in the database or has a typo')
+            item = input(prompt)
     else:
-        print('That item is either not in the database or has a typo')
-
-
+        sys.exit()
+def attacked(mprot, pprot):
+    yorn = input('Would you like to be attacked? Yes or No? ')
+    while yorn.lower() != 'quit':
+        if yorn == 'yes':
+            morp = input('Is the attack magical or physical? ')
+            while morp.lower() != 'quit':
+                if morp == 'magical':
+                    dam = int(input('Please enter damage value '))
+                    return (100 * dam) / (mprot + 100)
+                if morp == 'physical':
+                    dam = int(input('Please enter damage value '))
+                    return (100 * dam) / (pprot + 100)
+                else:
+                    print('Please select magical or physical')
+                    morp = input('Is the attack magical or physical? ')
+            else:
+                sys.exit()
+        if yorn == 'no':
+            sys.exit()
+    else:
+        print('Please emter a valid response. ')
+        yorn = input('Would you like to be attacked? Yes or No? ')
+def damask(mprot, pprot):
+    again = input('Would you like to be attacked again? ')
+    if again == 'yes':
+        return damloop(mprot, pprot)
+    else:
+        sys.exit()
+def damloop(mprot,pprot):
+    loop = input('Would you like to be attacked again? ')
+    if loop == 'yes':
+        while True:
+            print(f'You take {attacked(mprot, pprot):.2f} damage.')
+            again = input('Would you like to be attacked again? ')
+            if again == 'yes':
+                again = True
+                break
+            if again == 'no':
+                again = False
+                break
+    if loop == 'no':
+        sys.exit()
 def user_menu():
     print('Welcome to the Smite Calculator would you please enter the items you would like on your character')
     print('The items currently listed are valor, genjis, bulwark, failnot, soul, jotunn, hydras, malice, soul_eater, sov, mystical, midgardian, emperor, exe, asi, pythag')
@@ -394,12 +439,15 @@ def user_menu():
     print(item4['item'])
     print(item5['item'])
     print(item6['item'])
-    print(f'The physical protections are {phys_prots}')
-    print(f'The magical protections are {magic_prots}')
-    print(f'The physical power is {phys_power}')
-    print(f'The attack speed is {attack_speed} (this is as a percent but decimal form so 1.00 is 100 percent)')
-    print(f'The cooldown is {cooldown}')
-    print(f'The crowd control reduction is {ccr}')
+    print(f'The physical protections are {phys_prots:.2f}')
+    print(f'The magical protections are {magic_prots:.2f}')
+    print(f'The physical power is {phys_power:.2f}')
+    print(f'The attack speed is {attack_speed:.2f} (this is as a percent but decimal form so 1.00 is 100 percent)')
+    print(f'The cooldown is {cooldown:.2f}')
+    print(f'The crowd control reduction is {ccr:.2f}')
+    damaged = attacked(magic_prots, phys_prots)
+    print(f'You take {damaged:.2f} damage.')
+    damloop(magic_prots, phys_prots)
 
 if __name__ == '__main__':
   user_menu()
