@@ -335,6 +335,27 @@ pythag = {
     'crit' : False,
     'CCR' : False
     }
+heart = {
+    'item' : 'Heartseeker',
+    'physical prots' : False,
+    'magical prots' : False,
+    'damage mit' : False,
+    'mana' : 200,
+    'mp5' : 20,
+    'cooldown' : False,
+    'hp5' : False,
+    'health' : False,
+    'movement' : False,
+    'physical power' : 65,
+    'magical power' : False, 
+    'passive' : False,
+    'attack speed' : False,
+    'percent pen' : .1,
+    'flat pen' : False,
+    'lifesteal' : False,
+    'crit' : False,
+    'CCR' : False
+    }
 def get_item(prompt):
     item = input(prompt)
     while item.lower() != 'quit':
@@ -370,6 +391,8 @@ def get_item(prompt):
             return asi
         if item == 'pythag':
             return pythag
+        if item == 'heartseeker':
+            return heart
         else:
             print('That item is either not in the database or has a typo')
             item = input(prompt)
@@ -393,12 +416,12 @@ def attacked(mprot, pprot):
             else:
                 sys.exit()
         if yorn == 'no':
-            sys.exit()
+            break
     else:
         print('Please emter a valid response. ')
         yorn = input('Would you like to be attacked? Yes or No? ')
 def damtest(mprot, pprot):
-    again = input('Would you like to be attacked again? yes or no? ')
+    again = input('Would you like to be attacked? yes or no? ')
     while again == 'yes':
         print(f'You take {special_attack(mprot, pprot):.2f} damage.')
         again = input('Would you like to be attacked? ')
@@ -416,38 +439,78 @@ def special_attack(mprot, pprot):
             morp = input('Is the attack magical or physical? ')
     else:
         sys.exit()
+def hit(ypen, yppen, tpprot, tmprot):
+    hon = ('Would you like to attack someone? yes or no? ')
+    while hon.lower() != 'quit':
+        if hon == 'yes':
+            your_attack = input('What type of damage are you? magical or physical? ')
+            while your_attack.lower() != 'quit':
+                if your_attack == 'magical':
+                    dam = int(input('How much damage are you dealing? '))
+                    prots = tmprot * (1 - yppen) - ypen
+                    print(f'Before penetration you deal {(100 * dam) / (tmprot + 100)} damage.')
+                    return (100 * dam) / (prots + 100)
+                if your_attack == 'physical':
+                    dam = int(input('How much damage are you dealing? '))
+                    prots = tpprot * (1 - yppen) - ypen
+                    print(f'Before penetration you deal {(100 * dam) / (tpprot + 100)} damage.')
+                    return (100 * dam) / (prots + 100)
+                else:
+                    print('Please select magical or physical')
+                    your_attack = input('What type of damage are you? magical or physical? ')
+            else:
+                sys.exit()
+        if hon =='no':
+            break
+        else:
+            print('Please emter a valid response. ')
+            hon = input('Would you like to attack someone? yes or no? ')
 def user_menu():
     print('Welcome to the Smite Calculator would you please enter the items you would like on your character')
-    print('The items currently listed are valor, genjis, bulwark, failnot, soul, jotunn, hydras, malice, soul_eater, sov, mystical, midgardian, emperor, exe, asi, pythag')
-    item1 = get_item('Please enter your first item ')
-    item2 = get_item('Please enter your second item ')
-    item3 = get_item('Please enter your third item ')
-    item4 = get_item('Please enter your fourth item ')
-    item5 = get_item('Please enter your fifth item ')
-    item6 = get_item('Please enter your sixth item ')
-    phys_prots = item1['physical prots'] + item2['physical prots'] + item3['physical prots'] + item4['physical prots'] + item5['physical prots'] + item6['physical prots']
-    magic_prots = item1['magical prots'] + item2['magical prots'] + item3['magical prots'] + item4['magical prots'] + item5['magical prots'] + item6['magical prots']
-    phys_power = item1['physical power'] + item2['physical power'] + item3['physical power'] + item4['physical power'] + item5['physical power'] + item6['physical power']
-    attack_speed = item1['attack speed'] + item2['attack speed'] + item3['attack speed'] + item4['attack speed'] + item5['attack speed'] + item6['attack speed']
-    cooldown = item1['cooldown'] + item2['cooldown'] + item3['cooldown'] + item4['cooldown'] + item5['cooldown'] + item6['cooldown']
-    ccr = item1['CCR'] + item2['CCR'] + item3['CCR'] + item4['CCR'] + item5['CCR'] + item6['CCR']
+    print('The items currently listed are valor, genjis, bulwark, failnot, soul, jotunn, hydras, malice, soul_eater, sov, mystical, midgardian, emperor, exe, asi, pythag, heartseeker')
+    yitem1 = get_item('Please enter your first item ')
+    yitem2 = get_item('Please enter your second item ')
+    yitem3 = get_item('Please enter your third item ')
+    yitem4 = get_item('Please enter your fourth item ')
+    yitem5 = get_item('Please enter your fifth item ')
+    yitem6 = get_item('Please enter your sixth item ')
+    phys_prots = yitem1['physical prots'] + yitem2['physical prots'] + yitem3['physical prots'] + yitem4['physical prots'] + yitem5['physical prots'] + yitem6['physical prots']
+    magic_prots = yitem1['magical prots'] + yitem2['magical prots'] + yitem3['magical prots'] + yitem4['magical prots'] + yitem5['magical prots'] + yitem6['magical prots']
+    phys_power = yitem1['physical power'] + yitem2['physical power'] + yitem3['physical power'] + yitem4['physical power'] + yitem5['physical power'] + yitem6['physical power']
+    attack_speed = yitem1['attack speed'] + yitem2['attack speed'] + yitem3['attack speed'] + yitem4['attack speed'] + yitem5['attack speed'] + yitem6['attack speed']
+    cooldown = yitem1['cooldown'] + yitem2['cooldown'] + yitem3['cooldown'] + yitem4['cooldown'] + yitem5['cooldown'] + yitem6['cooldown']
+    ccr = yitem1['CCR'] + yitem2['CCR'] + yitem3['CCR'] + yitem4['CCR'] + yitem5['CCR'] + yitem6['CCR']
+    flatpen = yitem1['flat pen'] + yitem2['flat pen'] + yitem3['flat pen'] + yitem4['flat pen'] + yitem5['flat pen'] + yitem6['flat pen']
+    ppen = yitem1['percent pen'] + yitem2['percent pen'] + yitem3['percent pen'] + yitem4['percent pen'] + yitem5['percent pen'] + yitem6['percent pen']
     print('The build is')
-    print(item1['item'])
-    print(item2['item'])
-    print(item3['item'])
-    print(item4['item'])
-    print(item5['item'])
-    print(item6['item'])
+    print(yitem1['item'])
+    print(yitem2['item'])
+    print(yitem3['item'])
+    print(yitem4['item'])
+    print(yitem5['item'])
+    print(yitem6['item'])
     print(f'The physical protections are {phys_prots:.2f}')
     print(f'The magical protections are {magic_prots:.2f}')
     print(f'The physical power is {phys_power:.2f}')
     print(f'The attack speed is {attack_speed:.2f} (this is as a percent but decimal form so 1.00 is 100 percent)')
     print(f'The cooldown is {cooldown:.2f}')
     print(f'The crowd control reduction is {ccr:.2f}')
-    damaged = attacked(magic_prots, phys_prots)
-    print(f'You take {damaged:.2f} damage.')
+    print(f'The flat penetration is {flatpen:.2f}')
+    print(f'The percent penetration is {ppen:.2f}')
     damtest(magic_prots, phys_prots)
-
+    spicy = input('Continue? ')
+    while spicy.lower() != 'quit':
+        if spicy == 'yes':
+            titem1 = get_item('Please enter their first item ')
+            titem2 = get_item('Please enter their second item ')
+            titem3 = get_item('Please enter their third item ')
+            titem4 = get_item('Please enter their fourth item ')
+            titem5 = get_item('Please enter their fifth item ')
+            titem6 = get_item('Please enter their sixth item ')
+            tphys_prots = titem1['physical prots'] + titem2['physical prots'] + titem3['physical prots'] + titem4['physical prots'] + titem5['physical prots'] + titem6['physical prots']
+            tmagic_prots = titem1['magical prots'] + titem2['magical prots'] + titem3['magical prots'] + titem4['magical prots'] + titem5['magical prots'] + titem6['magical prots']
+            attack_value =  hit(flatpen, ppen, tphys_prots, tmagic_prots) 
+            print(f'After penetration you hit the enemy for {attack_value:.2f} damage')
 if __name__ == '__main__':
   user_menu()
 
